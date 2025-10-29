@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Navbar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #111;
+      color: #fff;
+    }
+
+    /* Navbar container */
+    nav {
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffb703;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Menu Links */
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffb703;
+    }
+
+    /* CTA button */
+    .order-btn {
+      background-color: #ffb703;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .order-btn:hover {
+      background-color: #ffa41b;
+    }
+
+    /* Hamburger menu (mobile) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffb703;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffb703;
+    }
+
+    .order-btn {
+      background-color: #ffb703;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .order-btn:hover {
+      background-color: #ffa41b;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Menu Header */
+.menu-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.menu-header h2 {
+  font-size: 2rem;
+  color: #ffb703; /* accent */
+  letter-spacing: 0.6px;
+  margin-bottom: 8px;
+}
+.menu-header p {
+  color: #cfcfcf;
+  font-size: 0.98rem;
+}
+
+/* Grid layout */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Card */
+.menu-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  min-height: 360px;
+}
+
+/* Hover lift */
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 30px rgba(0,0,0,0.6);
+}
+
+/* Image area */
+.card-media {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #111;
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 350ms ease;
+}
+.menu-card:hover .card-media img {
+  transform: scale(1.06);
+}
+
+/* Body */
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.dish-title {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: #fff;
+}
+.dish-desc {
+  color: #d0d0d0;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+/* Footer row: price + btn */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.price {
+  font-weight: 700;
+  color: #ffb703;
+  font-size: 1rem;
+}
+
+/* Button */
+.btn {
+  background: transparent;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 180ms ease, transform 120ms ease;
+}
+.btn:hover {
+  background: rgba(255,183,3,0.12);
+  transform: translateY(-2px);
+}
+.btn.clicked {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        background-color: #000;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+
+
+
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        background-color: #000;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+      position: relative;
+      margin-top: 70px; /* to avoid navbar overlap */
+    }
+
+    /* Overlay */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #ffb703;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      color: #f1f1f1;
+    }
+
+    .hero-buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background-color: #ffb703;
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffa41b;
+    }
+
+    .btn-secondary {
+      border: 2px solid #ffb703;
+      color: #ffb703;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ffb703;
+      color: #000;
+    }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="navbar">
+      <div class="logo">BlackBite</div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="#" class="order-btn">Order Now</a></li>
+      </ul>
+
+      <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+
+<!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">BlackBite</div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="#" class="order-btn">Order Now</a></li>
+      </ul>
+
+      <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to BlackBite Restaurant</h1>
+      <p>Experience the perfect blend of taste, ambiance, and hospitality. Indulge in dishes crafted with passion and served with love.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Book a Table</a>
+        <a href="#" class="btn-secondary">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+
+<main class="site-main">
+    <section class="menu-section">
+      <div class="container">
+        <header class="menu-header">
+          <h2>Our Signature Menu</h2>
+          <p>Selected favorites — handcrafted, fresh, and ready to delight.</p>
+        </header>
+
+        <div class="menu-grid">
+          <!-- Card 1 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1604908177522-2f6b0d4f9f8d?auto=format&fit=crop&w=800&q=60" alt="Grilled Steak">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Grilled Steak</h3>
+              <p class="dish-desc">Juicy flame-grilled sirloin with herb butter and roasted vegetables.</p>
+              <div class="card-footer">
+                <span class="price">₹599</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=800&q=60" alt="Pasta Carbonara">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Pasta Carbonara</h3>
+              <p class="dish-desc">Creamy carbonara with pancetta, parmesan, and cracked pepper.</p>
+              <div class="card-footer">
+                <span class="price">₹349</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=60" alt="Sushi Platter">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Sushi Platter</h3>
+              <p class="dish-desc">Assorted nigiri and maki — fresh, delicate, and artful.</p>
+              <div class="card-footer">
+                <span class="price">₹799</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60" alt="Margherita Pizza">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Margherita Pizza</h3>
+              <p class="dish-desc">Classic wood-fired pizza with tangy tomato and fresh basil.</p>
+              <div class="card-footer">
+                <span class="price">₹299</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60" alt="Paneer Tikka">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Paneer Tikka</h3>
+              <p class="dish-desc">Smoky marinated paneer skewers served with mint chutney.</p>
+              <div class="card-footer">
+                <span class="price">₹249</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=60" alt="Caesar Salad">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Caesar Salad</h3>
+              <p class="dish-desc">Crisp romaine, parmesan, anchovy dressing and garlic croutons.</p>
+              <div class="card-footer">
+                <span class="price">₹199</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 7 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=60" alt="Chocolate Lava Cake">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Chocolate Lava Cake</h3>
+              <p class="dish-desc">Warm molten chocolate cake served with vanilla ice cream.</p>
+              <div class="card-footer">
+                <span class="price">₹149</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 8 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1542444459-db07ae2c4b9f?auto=format&fit=crop&w=800&q=60" alt="Tandoori Chicken">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Tandoori Chicken</h3>
+              <p class="dish-desc">Spiced and roasted to perfection; served with lemon and salad.</p>
+              <div class="card-footer">
+                <span class="price">₹499</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 9 -->
+          <article class="menu-card">
+            <div class="card-media">
+              <img src="https://images.unsplash.com/photo-1512058564366-c9e3fdf3a8c2?auto=format&fit=crop&w=800&q=60" alt="Mango Smoothie">
+            </div>
+            <div class="card-body">
+              <h3 class="dish-title">Mango Smoothie</h3>
+              <p class="dish-desc">Fresh mango pulp blended with yogurt and a hint of honey.</p>
+              <div class="card-footer">
+                <span class="price">₹129</span>
+                <button class="btn">Add</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

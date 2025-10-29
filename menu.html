@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | BlackBite Restaurant</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #111;
+      color: #fff;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffb703;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffb703;
+    }
+
+    .order-btn {
+      background-color: #ffb703;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .order-btn:hover {
+      background-color: #ffa41b;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        background-color: #000;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.3s ease;
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 80vh;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+      margin-top: 70px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #ffb703;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #eee;
+      margin-bottom: 25px;
+    }
+
+    .hero .btn {
+      background-color: #ffb703;
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .hero .btn:hover {
+      background-color: #ffa41b;
+    }
+
+    /* Menu Section */
+    .menu-section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .menu-section h1 {
+      color: #ffb703;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .menu-card {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255,183,3,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255,183,3,0.4);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .menu-card-content {
+      padding: 15px;
+    }
+
+    .menu-card-content h3 {
+      color: #ffb703;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .menu-card-content p {
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: #ffb703;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Advanced Footer */
+    footer {
+      background-color: #000;
+      padding: 50px 20px 20px;
+      color: #ccc;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 30px;
+    }
+
+    .footer-logo h2 {
+      color: #ffb703;
+      margin-bottom: 15px;
+    }
+
+    .footer-about p {
+      color: #aaa;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .footer-links h3, .footer-contact h3 {
+      color: #ffb703;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links ul li a {
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links ul li a:hover {
+      color: #ffb703;
+    }
+
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .social-links a {
+      color: #ffb703;
+      margin-right: 10px;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">BlackBite</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index1.html">Home</a></li>
+        <li><a href="aboutus.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="ordernow.html" class="order-btn">Order Now</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Our Delicious Menu</h1>
+      <p>Experience the taste of perfection crafted by our master chefs.</p>
+      <a href="#menu" class="btn">Explore Dishes</a>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu-section">
+    <h1>Our Signature Dishes</h1>
+    <div class="menu-grid">
+      <!-- 12 Grid Cards -->
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1605475128023-8867e0d3b61a?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Classic Burger</h3><p>Juicy beef patty with cheese and veggies.</p><p class="price">₹299</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Grilled Sandwich</h3><p>Fresh veggies and melted cheese layers.</p><p class="price">₹149</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1606755962773-0e6a5b6b8c97?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Cheese Pizza</h3><p>Loaded with mozzarella and fresh toppings.</p><p class="price">₹399</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Chicken Wings</h3><p>Spicy grilled wings with BBQ sauce.</p><p class="price">₹249</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1523983302122-73e869e1f850?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Pasta Alfredo</h3><p>Creamy white sauce with herbs and cheese.</p><p class="price">₹349</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1572441710534-680f5e60c7c2?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Paneer Tikka</h3><p>Smoky grilled paneer with spices.</p><p class="price">₹229</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Veg Biryani</h3><p>Fragrant rice with veggies and spices.</p><p class="price">₹179</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1576402187875-9b87f0a5b7b1?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Chocolate Shake</h3><p>Rich chocolate milkshake with cream.</p><p class="price">₹129</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1601924570361-4964e8e70357?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Fresh Salad</h3><p>Healthy greens with tangy dressing.</p><p class="price">₹149</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>BBQ Chicken</h3><p>Grilled to perfection with smoky flavor.</p><p class="price">₹459</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Ice Cream Sundae</h3><p>Vanilla ice cream with chocolate toppings.</p><p class="price">₹119</p></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=500&q=60"><div class="menu-card-content"><h3>Mocktail Mix</h3><p>Refreshing fruit blends served chilled.</p><p class="price">₹199</p></div></div>
+    </div>
+  </section>
+
+  <!-- Advanced Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>BlackBite</h2>
+        <div class="footer-about">
+          <p>Where passion meets flavor! Enjoy delicious dishes, a cozy ambiance, and an unforgettable dining experience at BlackBite.</p>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index1.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="contactus.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>📍 681/5 Siddharth Nagar, Taudhakpur Road, Near Lalpur Chauraha, Kanpur</p>
+        <p>📞 +91 7380885555, +91 7052028000</p>
+        <p>📧 info@blackbite.com</p>
+        <div class="social-links">
+          <a href="#">🌐</a>
+          <a href="#">📘</a>
+          <a href="#">📸</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 BlackBite Restaurant | Designed with ❤️ by Ashutosh Kumar
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>

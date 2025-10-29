@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | BlackBite Restaurant</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #111; color: #fff; }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffb703;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-links li a:hover { color: #ffb703; }
+    .order-btn {
+      background-color: #ffb703;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .order-btn:hover { background-color: #ffa41b; }
+
+    .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+    .bar { width: 25px; height: 3px; background-color: #fff; margin: 4px 0; }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        background-color: #000;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        transition: left 0.3s ease;
+      }
+      .nav-links.active { left: 0; }
+      .menu-toggle { display: flex; }
+    }
+
+    /* Hero */
+    .hero {
+      height: 80vh;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      margin-top: 70px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ffb703;
+      margin-bottom: 15px;
+    }
+    .hero p { color: #f1f1f1; font-size: 1.1rem; }
+
+    /* Menu Section */
+    .container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+    .menu-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .menu-header h2 {
+      color: #ffb703;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .menu-header p { color: #ccc; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .menu-card {
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .menu-card:hover { transform: translateY(-5px); }
+    .menu-card img { width: 100%; height: 180px; object-fit: cover; }
+    .card-body { padding: 15px; }
+    .card-body h3 { color: #ffb703; margin-bottom: 8px; }
+    .card-body p { color: #ccc; font-size: 0.9rem; margin-bottom: 12px; }
+    .price { color: #ffb703; font-weight: 600; }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: #ccc;
+      padding: 60px 20px 20px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer h2, .footer h3 {
+      color: #ffb703;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+    .footer-section p { color: #bbb; line-height: 1.6; }
+    .footer-section.links ul { list-style: none; }
+    .footer-section.links ul li { margin-bottom: 8px; }
+    .footer-section.links ul li a { color: #ccc; text-decoration: none; }
+    .footer-section.links ul li a:hover { color: #ffb703; }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      border-top: 1px solid #222;
+      padding-top: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">BlackBite</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index1.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="ordernow.html" class="order-btn">Order Now</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Discover Our Delicious Menu</h1>
+      <p>Crafted with passion. Served with love. Taste the difference at BlackBite.</p>
+    </div>
+  </section>
+
+  <!-- Menu Grid -->
+  <div class="container">
+    <div class="menu-header">
+      <h2>Our Signature Dishes</h2>
+      <p>Explore 12 delicious dishes made fresh every day.</p>
+    </div>
+    <div class="menu-grid">
+      <!-- 12 Menu Cards -->
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1604908177522-2f6b0d4f9f8d?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Grilled Steak</h3><p>Juicy flame-grilled sirloin with roasted veggies.</p><span class="price">₹599</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Pasta Carbonara</h3><p>Creamy sauce with pancetta & parmesan.</p><span class="price">₹349</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Sushi Platter</h3><p>Assorted nigiri and maki rolls.</p><span class="price">₹799</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Margherita Pizza</h3><p>Wood-fired pizza with basil & mozzarella.</p><span class="price">₹299</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Paneer Tikka</h3><p>Marinated paneer skewers with mint chutney.</p><span class="price">₹249</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Caesar Salad</h3><p>Romaine lettuce, croutons & parmesan.</p><span class="price">₹199</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Chocolate Lava Cake</h3><p>Molten chocolate cake with vanilla ice cream.</p><span class="price">₹149</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1542444459-db07ae2c4b9f?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Tandoori Chicken</h3><p>Spiced and roasted to perfection.</p><span class="price">₹499</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1512058564366-c9e3fdf3a8c2?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Mango Smoothie</h3><p>Fresh mango blended with yogurt.</p><span class="price">₹129</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1604152135912-04a5308c8d2b?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Chicken Burger</h3><p>Loaded chicken patty with cheese & lettuce.</p><span class="price">₹199</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Veg Sandwich</h3><p>Grilled sandwich with fresh veggies.</p><span class="price">₹149</span></div></div>
+      <div class="menu-card"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60"><div class="card-body"><h3>Cold Coffee</h3><p>Chilled creamy coffee with chocolate.</p><span class="price">₹119</span></div></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2>BlackBite</h2>
+        <p>Serving happiness since 2010. Taste, passion, and quality in every bite.</p>
+      </div>
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index1.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contactus.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p>📍 123 Main Street, Kanpur, India</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉ info@blackbite.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 BlackBite Restaurant | Designed with ❤️ by YourName
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Now | BlackBite Restaurant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #111; color: #fff; scroll-behavior: smooth; }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background-color: #000;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+    .navbar {
+      max-width: 1200px; margin: auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 20px;
+    }
+    .logo {
+      font-size: 1.5rem; font-weight: 700;
+      color: #ffb703; text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; gap: 25px; list-style: none;
+    }
+    .nav-links li a {
+      color: #fff; text-decoration: none; font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-links li a:hover { color: #ffb703; }
+    .order-btn {
+      background-color: #ffb703; color: #000;
+      padding: 8px 16px; border-radius: 5px;
+      text-decoration: none; font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .order-btn:hover { background-color: #ffa41b; }
+    .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+    .bar { width: 25px; height: 3px; background-color: #fff; margin: 4px 0; transition: 0.4s; }
+
+    /* Hero Section */
+    .hero {
+      height: 70vh;
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #fff; position: relative;
+      margin-top: 70px;
+    }
+    .hero::after {
+      content: ""; position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6); z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+    }
+    .hero h1 {
+      font-size: 3rem; font-weight: 700; color: #ffb703; margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem; color: #eee;
+    }
+
+    /* Order Form */
+    .order-section {
+      max-width: 800px; margin: 60px auto; padding: 40px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .order-section h2 {
+      text-align: center; color: #ffb703; margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+    form {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    input, select, textarea {
+      width: 100%; padding: 12px; border-radius: 8px;
+      border: none; outline: none;
+      background-color: #222; color: #fff;
+      font-size: 1rem;
+    }
+    input::placeholder, textarea::placeholder { color: #aaa; }
+    textarea { resize: none; height: 100px; }
+    button {
+      padding: 12px; border: none; border-radius: 8px;
+      background-color: #ffb703; color: #000;
+      font-weight: 700; cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover { background-color: #ffa41b; }
+
+    /* Footer */
+    .footer {
+      background-color: #000; color: #ccc;
+      padding: 60px 20px 20px; margin-top: 60px;
+    }
+    .footer-container {
+      max-width: 1200px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer h2, .footer h3 { color: #ffb703; margin-bottom: 15px; text-transform: uppercase; }
+    .footer-section p { margin-bottom: 12px; color: #bbb; }
+    .footer-section.links ul { list-style: none; }
+    .footer-section.links ul li { margin-bottom: 10px; }
+    .footer-section.links ul li a { color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+    .footer-section.links ul li a:hover { color: #ffb703; }
+    .social-icons a { margin-right: 15px; color: #ffb703; font-size: 1.2rem; transition: transform 0.3s; }
+    .social-icons a:hover { transform: scale(1.2); color: #ffa41b; }
+    .footer-bottom {
+      text-align: center; margin-top: 40px;
+      border-top: 1px solid #222; padding-top: 15px;
+      font-size: 0.9rem; color: #aaa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed; top: 60px; left: -100%;
+        background-color: #000; width: 100%; height: 100vh;
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 40px; transition: left 0.3s ease;
+      }
+      .nav-links.active { left: 0; }
+      .menu-toggle { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">BlackBite</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index1.html">Home</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contactus.html">Contact</a></li>
+        <li><a href="ordernow.html" class="order-btn">Order Now</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Order Your Favorite Dish</h1>
+      <p>Fast, Fresh, and Delicious — Delivered Right To Your Doorstep.</p>
+    </div>
+  </section>
+
+  <!-- Order Form Section -->
+  <section class="order-section">
+    <h2>Place Your Order</h2>
+    <form onsubmit="return submitOrder(event)">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <input type="text" id="address" placeholder="Delivery Address" required>
+      <select id="menuItem" required>
+        <option value="">Select a Dish</option>
+        <option>Grilled Steak - ₹599</option>
+        <option>Pasta Carbonara - ₹349</option>
+        <option>Sushi Platter - ₹799</option>
+        <option>Margherita Pizza - ₹299</option>
+        <option>Paneer Tikka - ₹249</option>
+        <option>Chocolate Lava Cake - ₹149</option>
+      </select>
+      <input type="number" id="quantity" placeholder="Quantity" min="1" required>
+      <textarea id="note" placeholder="Additional Notes (Optional)"></textarea>
+      <button type="submit">Confirm Order</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section about">
+        <h2>BlackBite</h2>
+        <p>Welcome to <span class="highlight">BlackBite</span>, where flavors meet passion! Serving the best culinary delights since 2010 — made with love and the finest ingredients.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index1.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contactus.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Kanpur, India</p>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@blackbite.com</p>
+        <p><i class="far fa-clock"></i> Mon – Sun: 10:00 AM – 10:00 PM</p>
+      </div>
+
+      <div class="footer-section newsletter">
+        <h3>Subscribe</h3>
+        <p>Join our mailing list to get exclusive offers & updates!</p>
+        <form>
+          <input type="email" placeholder="Enter your email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 BlackBite Restaurant | Designed with ❤️ by YourName</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    function submitOrder(event) {
+      event.preventDefault();
+      alert("✅ Thank you! Your order has been placed successfully.\nWe’ll contact you soon to confirm.");
+      document.querySelector("form").reset();
+    }
+  </script>
+</body>
+</html>
